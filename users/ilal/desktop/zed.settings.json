@@ -1,0 +1,55 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "autosave": "on_focus_change",
+  "tabs": {
+    "close_position": "right",
+    "git_status": true
+  },
+  "inlay_hints": {
+    "enabled": true
+  },
+
+  // Default languages settings
+  "tab_size": 4,
+  "format_on_save": "on",
+  "soft_wrap": "none",
+  "ensure_final_newline_on_save": true,
+
+  // Per language settings
+  "languages":{
+    "Nix":{
+      "tab_size": 2
+    },
+    "JSON":{
+      "tab_size": 2
+    }
+  },
+
+  "theme": {
+    "mode": "dark",
+    "dark": "Ayu Dark",
+    "light": "Atelier Lakeside Light"
+  },
+
+  "journal": {
+    "hour_format": "hour24"
+  },
+
+  // Terminal
+  "copy_on_select": true,
+
+  // Meh ...
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  }
+}
