@@ -26,8 +26,7 @@
 
     # Internet
     aria2 # Downloader
-    floorp
-    ungoogled-chromium
+    #floorp # broken 11.14.1
 
     # misc
     which
@@ -62,10 +61,12 @@
     enableCompletion = true;
   };
 
+  programs.firefox.enable = true;
+
   gtk.enable = true;
 
   # Config to target compatibility of HomeManager version
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   # Let HomeManager install and manage itself
   programs.home-manager.enable = true;
