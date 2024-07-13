@@ -9,9 +9,10 @@
 {
   "ui_font_size": 16,
   "buffer_font_size": 15,
+  "buffer_font_family": "CaskaydiaCove Nerd Font",
   "autosave": "on_focus_change",
   "tabs": {
-    "close_position": "right",
+    "close_position": "left",
     "git_status": true
   },
   "inlay_hints": {
@@ -25,11 +26,11 @@
   "ensure_final_newline_on_save": true,
 
   // Per language settings
-  "languages":{
-    "Nix":{
+  "languages": {
+    "Nix": {
       "tab_size": 2
     },
-    "JSON":{
+    "JSON": {
       "tab_size": 2
     }
   },

@@ -15,14 +15,18 @@
         # Syatem type
         ./system-type/Laptop/configuration.nix
 
-        # All users
-        ./users/users.nix
 
         # Override
        	home-manager.nixosModules.home-manager {
-       	  home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager = {
+            useUserPackages = true;
+       	    useGlobalPkgs = true;
+            extraSpecialArgs = {rootPath = ./.;};
+          };
        	}
+
+        # All users
+        ./users/users.nix
       ];
     };
   };

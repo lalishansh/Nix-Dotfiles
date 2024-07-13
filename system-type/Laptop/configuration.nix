@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -32,16 +32,36 @@
     LC_TIME = "en_IN";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services = {
+    # Configure keymap in X11
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+    openssh.enable = true;
+    greetd = {
+      enable = true;
+      settings.default_session = {
+        command = "${lib.getExe pkgs.greetd.tuigreet} -t -g '¯\_(⌐■ ͜ʖ■)_/¯ ♪♬✧' -r --remember-user-session -s ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red";
+        user = "greeter";
+      };
+    };
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+      jack.enable = true;
+      systemWide = false;
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
   nix = {
     settings.experimental-features = [ "nix-command" "flakes" ]; # Enable flakes support
     settings.auto-optimise-store = true; # Store is optimised during every build (This may/will slow down builds)
+    settings.warn-dirty = false;
     gc = { # Garbage collection
       automatic = true;
       dates = "weekly";
@@ -65,21 +85,65 @@
   security.polkit.enable = true;
   hardware.graphics.enable = true;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-    jack.enable = true;
-    systemWide = false;
-  };
 
-  qt.enable = true;
-  programs.git = {
-    enable = true;
-    package = pkgs.gitFull;
-    config.credential.helper = "libsecret";
+  programs = {
+    dconf.enable = true; # for gtk
+    git = {
+      enable = true;
+      package = pkgs.gitFull;
+      config.credential.helper = "libsecret";
+    };
+    nix-ld = {
+      enable = true;
+      package = pkgs.nix-ld-rs;
+      libraries = with pkgs; [
+        SDL
+        SDL2
+        SDL2_image
+        SDL2_mixer
+        SDL2_ttf
+        SDL_image
+        SDL_mixer
+        SDL_ttf
+        alsa-lib
+        at-spi2-atk
+        at-spi2-core
+        atk
+        cairo
+        cups
+        curl
+        dbus
+        fontconfig
+        freetype
+        fuse3
+        gdk-pixbuf
+        glib
+        gtk3
+        icu
+        libGL
+        libappindicator-gtk3
+        libdrm
+        libglvnd
+        libnotify
+        libpulseaudio
+        libunwind
+        libusb1
+        libuuid
+        libxkbcommon
+        libxml2
+        mesa
+        nspr
+        openssl
+        pango
+        pipewire
+        stdenv.cc.cc
+        systemd
+        vulkan-loader
+        wayland
+        xz
+        zlib
+      ];
+    };
   };
 
   # This value determines the NixOS release from which the default

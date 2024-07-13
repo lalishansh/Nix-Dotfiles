@@ -1,0 +1,13 @@
+/* Rofi config file */
+configuration {
+    font: "CaskaydiaCove Nerd Font 12";
+    show-icons: true;
+    display-window: "Window";
+    display-drun: "Search";
+}
+
+@theme "my-theme"
+
+listview {
+    lines: 12;
+}
