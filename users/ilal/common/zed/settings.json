@@ -19,6 +19,8 @@
     "enabled": true
   },
 
+  "base_keymap": "JetBrains",
+
   // Default languages settings
   "tab_size": 4,
   "format_on_save": "on",
@@ -28,11 +30,18 @@
   // Per language settings
   "languages": {
     "Nix": {
+      "format_on_save": "on",
       "tab_size": 2
     },
     "JSON": {
       "tab_size": 2
     }
+  },
+
+  "auto_install_extensions": {
+    "nix": true,
+    "vale": true,
+    "typst": true
   },
 
   "theme": {

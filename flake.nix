@@ -15,15 +15,15 @@
         # Syatem type
         ./system-type/Laptop/configuration.nix
 
-
         # Override
-       	home-manager.nixosModules.home-manager {
+        home-manager.nixosModules.home-manager
+        {
           home-manager = {
             useUserPackages = true;
-       	    useGlobalPkgs = true;
-            extraSpecialArgs = {rootPath = ./.;};
+            useGlobalPkgs = true;
+            backupFileExtension = "backup";
           };
-       	}
+        }
 
         # All users
         ./users/users.nix

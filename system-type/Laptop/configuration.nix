@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware.nix
     ];
 
@@ -34,15 +35,13 @@
 
   services = {
     # Configure keymap in X11
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
-    openssh.enable = true;
+    xserver.xkb = { layout = "us"; variant = ""; };
+    libinput.touchpad.naturalScrolling = true;
+    gnome.gnome-keyring.enable = true;
     greetd = {
       enable = true;
       settings.default_session = {
-        command = "${lib.getExe pkgs.greetd.tuigreet} -t -g '¯\_(⌐■ ͜ʖ■)_/¯ ♪♬✧' -r --remember-user-session -s ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red";
+        command = "${lib.getExe pkgs.greetd.tuigreet} -t -g '¯\_(⌐■ ͜-■)_/¯ ♬♪✧' -r --remember-user-session -s ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions:${config.services.displayManager.sessionData.desktops}/share/xsessions --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red";
         user = "greeter";
       };
     };
@@ -62,7 +61,8 @@
     settings.experimental-features = [ "nix-command" "flakes" ]; # Enable flakes support
     settings.auto-optimise-store = true; # Store is optimised during every build (This may/will slow down builds)
     settings.warn-dirty = false;
-    gc = { # Garbage collection
+    gc = {
+      # Garbage collection
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";

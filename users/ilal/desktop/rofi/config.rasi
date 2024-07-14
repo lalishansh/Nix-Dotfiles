@@ -1,12 +1,15 @@
 /* Rofi config file */
 configuration {
     font: "CaskaydiaCove Nerd Font 12";
+    terminal: "foot";
     show-icons: true;
     display-window: "Window";
     display-drun: "Search";
+    location: "center";
+    cycle: true;
 }
 
-@theme "my-theme"
+@theme "mytheme"
 
 listview {
     lines: 12;
