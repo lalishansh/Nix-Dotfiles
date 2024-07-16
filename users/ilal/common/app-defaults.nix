@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 with lib;
 let
@@ -108,6 +108,11 @@ let
       ];
     in
     lib.zipAttrs (map (d: lib.genAttrs mimeTypes (_: d)) desktopFiles);
+
+  temp = {
+    aria2ConfigFile  = "${config.home.homeDirectory}/.config/aria2/aria2.conf";
+    aria2SessionFile = "${config.home.homeDirectory}/Downloads/.aria2/aria2.session";
+  };
 in
 {
   xdg.configFile."mimeapps.list".force = true;
@@ -136,6 +141,17 @@ in
     persepolis
   ];
 
+  # Copy app specific configs, for symlinks use `config.lib.file.mkOutOfStoreSymlink + <absolute-path>` instead of <path>
+  home.file = {
+    ".config/foot/foot.ini".source = ./foot-terminal.ini;
+    ".config/zed" = { source = ./zed; recursive = true; };
+    "${temp.aria2ConfigFile}".source = ./aria2.conf;
+  };
+
+  home.activation.aria2TouchSessionFile = hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p $(dirname ${temp.aria2SessionFile}) && touch ${temp.aria2SessionFile}
+  '';
+
   systemd.user.services.aria2 = {
     Unit = {
       Description = "aria2 service";
@@ -143,22 +159,10 @@ in
     };
     Service = {
       Restart = "on-abort";
-      ExecStart = "
-      cfgFile='~/.config/aria2/aria2.conf'
-      ssnFile='~/Downloads/.aria2/aria2.session'
-      mkdir -p $(dirname $sessionfile) && touch $sessionfile
-      ${lib.getExe pkgs.aria2} --conf-path=$configfile --save-session=$sessionfile
-      ";
+      ExecStart = "${lib.getExe pkgs.aria2} --conf-path='${temp.aria2ConfigFile}' --input-file='${temp.aria2SessionFile}' --save-session='${temp.aria2SessionFile}'";
       ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
     };
     Install.WantedBy = [ "default.target" ];
-  };
-
-  # Copy app specific configs, for symlinks use `config.lib.file.mkOutOfStoreSymlink + <absolute-path>` instead of <path>
-  home.file = {
-    ".config/foot/foot.ini".source = ./foot-terminal.ini;
-    ".config/zed" = { source = ./zed; recursive = true; };
-    ".config/aria2/aria2.conf".source = ./aria2.conf;
   };
 
   programs.firefox = {
