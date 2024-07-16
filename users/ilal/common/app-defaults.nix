@@ -144,8 +144,8 @@ in
     Service = {
       Restart = "on-abort";
       ExecStart = "
-      $configfile = '~/.config/aria2/aria2.conf'
-      $sessionfile = '~/Downloads/.aria2/aria2.session'
+      cfgFile='~/.config/aria2/aria2.conf'
+      ssnFile='~/Downloads/.aria2/aria2.session'
       mkdir -p $(dirname $sessionfile) && touch $sessionfile
       ${lib.getExe pkgs.aria2} --conf-path=$configfile --save-session=$sessionfile
       ";
