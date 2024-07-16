@@ -5,7 +5,7 @@ configuration {
     show-icons: true;
     display-window: "Window";
     display-drun: "Search";
-    location: "center";
+    location: 0;
     cycle: true;
 }
 

@@ -184,7 +184,7 @@ static const Key keys[] = {
     {SUPER, XKB(Down), setlayout, {0}},
     {SUPER | SHIFT, XKB(Right), setmfact, {.f = +0.05f}},
     {SUPER | SHIFT, XKB(Left), setmfact, {.f = -0.05f}},
-    {SUPER, XKB(Q), killclient, {0}},
+    {SUPER, XKB(q), killclient, {0}},
 
     // defaults
     {ALT, XKB(j), focusstack, {.i = +1}},
