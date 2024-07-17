@@ -26,7 +26,7 @@
 
     # Tools
     bitwarden
-    libsForQt5.kdeconnect-kde
+    android-file-transfer
 
     # nix related
     nix-output-monitor # for 'nom' command (more verbose than 'nix')
@@ -83,7 +83,6 @@
   };
 
   services.cliphist.enable = true;
-  services.kdeconnect.enable = true;
 
   # Config to target compatibility of HomeManager version
   home.stateVersion = "24.05";

@@ -4,8 +4,8 @@ set -e
 
 pushd "$(dirname "$0")" > /dev/null
 
-logfile="/tmp/nixos-rebuild.log"
-touch "$logfile"
+# logfile="/tmp/nixos-rebuild.log"
+# touch "$logfile"
 
 raise_error() {
     cat $logfile
@@ -18,6 +18,7 @@ raise_error() {
 git add .
 
 # 2. Run nixos-rebuild switch
+# sudo nixos-rebuild switch --show-trace &> $logfile || raise_error
 sudo nixos-rebuild switch --show-trace || raise_error
 
 # 3. Commit changes and exit
