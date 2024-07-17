@@ -197,7 +197,7 @@ in
       slang = "en";
       save-position-on-quit = "yes";
 
-      vo = "gpu-next";
+      #vo = "gpu-next";
       hwdec = "auto";
       gpu-context = "wayland";
       gpu-api = "vulkan";
