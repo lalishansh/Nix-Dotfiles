@@ -87,6 +87,7 @@
   security.rtkit.enable = true;
 
   programs = {
+    adb.enable = true;
     dconf.enable = true; # for gtk
     git = {
       enable = true;

@@ -26,7 +26,7 @@
 
     # Tools
     bitwarden
-    android-file-transfer
+    adbtuifm
 
     # nix related
     nix-output-monitor # for 'nom' command (more verbose than 'nix')
