@@ -26,6 +26,7 @@
 
     # Tools
     bitwarden
+    libsForQt5.kdeconnect-kde
 
     # nix related
     nix-output-monitor # for 'nom' command (more verbose than 'nix')

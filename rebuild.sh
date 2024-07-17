@@ -18,7 +18,7 @@ raise_error() {
 git add .
 
 # 2. Run nixos-rebuild switch
-sudo nixos-rebuild switch --show-trace &> $logfile || raise_error
+sudo nixos-rebuild switch --show-trace || raise_error
 
 # 3. Commit changes and exit
 git commit -am "$(nixos-rebuild list-generations | grep current)"
