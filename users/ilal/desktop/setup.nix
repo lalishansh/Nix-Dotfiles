@@ -25,7 +25,21 @@
 
   home.packages = with pkgs; [
     (dwl.override {
-      conf = ./dwl/config.h;
+      conf = builtins.readFile (pkgs.substituteAll {
+          src = ./dwl/config.h;
+          termcmd = "\"${lib.getExe pkgs.foot}\"";
+          menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
+          clipboard = "\"rofi\", \"-modi\", \"clipboard:cliphist-rofi-img\", \"-show\", \"clipboard\", \"-show-icons\"";
+        });
+      # version = "0.5";
+      # src = fetchFromGitea {
+      #     domain = "codeberg.org";
+      #     owner = "dwl";
+      #     repo = "dwl";
+      #     rev = "v${version}";
+      #     hash = "sha256-U/vqGE1dJKgEGTfPMw02z5KJbZLWY1vwDJWnJxT8urM=";
+      #   };
+      # patches = [ ./dwl/minimalborders.patch ];
       enableXWayland = true;
     })
 

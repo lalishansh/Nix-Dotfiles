@@ -132,11 +132,11 @@ static const enum libinput_config_tap_button_map button_map =
   }
 
 /* commands */
-static const char *termcmd[] = {"foot", NULL};
-static const char *menucmd[] = {"rofi", "-show", NULL};
-static const char *cliphist[] = {
-    "rofi",        "-modi", "clipboard:cliphist-rofi-img", "-show", "clipboard",
-    "-show-icons", NULL};
+// clang-format off
+static const char *termcmd[] = { @termcmd@, NULL};
+static const char *menucmd[] = { @menucmd@, NULL};
+static const char *cliphist[] = { @clipboard@, NULL};
+// clang-format on
 
 #define MAX_VOLUME_MULTIPLIER(decimal) #decimal
 static const char *volupcmd[] = {"wpctl",
