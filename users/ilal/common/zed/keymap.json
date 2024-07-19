@@ -12,7 +12,7 @@
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
       // put key-bindings here if you want them to work only in normal mode
-      "alt-g": ["task:spawn", "Git TUI Integration"]
+      "alt-g": ["task:spawn", "Git-TUI-Integration"]
     }
   }
 ]
