@@ -135,7 +135,6 @@ static const enum libinput_config_tap_button_map button_map =
 // clang-format off
 static const char *termcmd[] = { @termcmd@, NULL};
 static const char *menucmd[] = { @menucmd@, NULL};
-static const char *cliphist[] = { @clipboard@, NULL};
 // clang-format on
 
 #define MAX_VOLUME_MULTIPLIER(decimal) #decimal
@@ -174,7 +173,6 @@ static const Key keys[] = {
 
     // custom
     {ALT, XKB(space), spawn, {.v = menucmd}},
-    {SUPER, XKB(v), spawn, {.v = cliphist}},
     {SUPER, XKB(space), togglefloating, {0}},
     {ALT, XKB(Return), togglefullscreen, {0}},
     {SUPER | SHIFT, XKB(plus), zoom, {0}},

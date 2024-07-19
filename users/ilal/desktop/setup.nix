@@ -24,27 +24,22 @@
   # };
 
   home.packages = with pkgs; [
+    # TESTING
+    # (import ./dwl/pkg.nix)
+
     (dwl.override {
       conf = builtins.readFile (pkgs.substituteAll {
-          src = ./dwl/config.h;
-          termcmd = "\"${lib.getExe pkgs.foot}\"";
-          menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
-          clipboard = "\"rofi\", \"-modi\", \"clipboard:cliphist-rofi-img\", \"-show\", \"clipboard\", \"-show-icons\"";
-        });
-      # src = fetchFromGitea {
-      #     domain = "codeberg.org";
-      #     owner = "dwl";
-      #     repo = "dwl";
-      #     rev = "v0.5";
-      #     hash = "sha256-U/vqGE1dJKgEGTfPMw02z5KJbZLWY1vwDJWnJxT8urM=";
-      #   };
-      # patches = [ ./dwl/minimalborders.patch ];
+        src = ./dwl/config.h;
+        termcmd = "\"${lib.getExe pkgs.foot}\"";
+        menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
+      });
       enableXWayland = true;
     })
 
     rofi-wayland-unwrapped
     #(writeShellScriptBin "cliphist-rofi" (builtins.readFile ./rofi/scripts/cliphist-rofi-img))
 
+    # cliphist
     gnome-keyring
   ];
 

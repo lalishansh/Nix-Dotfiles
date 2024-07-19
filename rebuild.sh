@@ -4,11 +4,7 @@ set -e
 
 pushd "$(dirname "$0")" > /dev/null
 
-# logfile="/tmp/nixos-rebuild.log"
-# touch "$logfile"
-
 raise_error() {
-    cat $logfile
     git diff HEAD --minimal --ignore-space-change --ignore-submodules --ignore-all-space
     popd > /dev/null
     exit 1
@@ -18,8 +14,7 @@ raise_error() {
 git add .
 
 # 2. Run nixos-rebuild switch
-# sudo nixos-rebuild switch --show-trace &> $logfile || raise_error
-sudo nixos-rebuild switch --show-trace || raise_error
+(sudo nixos-rebuild switch --show-trace 2>&1) || raise_error # log to file and stdout
 
 # 3. Commit changes and exit
 git commit -am "$(nixos-rebuild list-generations | grep current)"

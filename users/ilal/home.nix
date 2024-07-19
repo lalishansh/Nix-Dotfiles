@@ -47,7 +47,6 @@
     wl-clipboard
     wl-screenrec
     wlr-randr
-    cliphist
   ];
 
   programs = {

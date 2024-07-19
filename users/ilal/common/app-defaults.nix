@@ -130,6 +130,7 @@ in
     nixd
     nixpkgs-fmt
     vale-ls
+    gitui
 
     feh
     yt-dlp
