@@ -31,24 +31,16 @@
       volupcmd = "\"wpctl\", \"set-volume\", \"-l\", \"1.5\", \"@DEFAULT_AUDIO_SINK@\", \"5%+\"";
       voldowncmd = "\"wpctl\", \"set-volume\", \"@DEFAULT_AUDIO_SINK@\", \"5%-\"";
       volmutecmd = "\"wpctl\", \"set-mute\", \"@DEFAULT_AUDIO_SINK@\", \"toggle\"";
-      brupcmd = "\"brightnessctl\", \"-e\", \"set\", \"5%+\"";
-      brdowncmd = "\"brightnessctl\", \"-e\", \"set\", \"5%-\"";
+      brupcmd = "\"${lib.getExe pkgs.brightnessctl}\", \"-e\", \"set\", \"5%+\"";
+      brdowncmd = "\"${lib.getExe pkgs.brightnessctl}\", \"-e\", \"set\", \"5%-\"";
     })
-
-    # (dwl.override {
-    #   conf = builtins.readFile (pkgs.substituteAll {
-    #     src = ./dwl/config.h;
-    #     termcmd = "\"${lib.getExe pkgs.foot}\"";
-    #     menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
-    #   });
-    #   enableXWayland = true;
-    # })
 
     rofi-wayland-unwrapped
     #(writeShellScriptBin "cliphist-rofi" (builtins.readFile ./rofi/scripts/cliphist-rofi-img))
 
     # cliphist
     gnome-keyring
+    brightnessctl
   ];
 
   home.file.".config/rofi/config.rasi".source = ./rofi/config.rasi;

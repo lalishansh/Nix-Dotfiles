@@ -39,7 +39,6 @@
     # system tools
     pciutils # lspci
     usbutils # lsusb
-    brightnessctl
     playerctl
     dconf
     xdg-utils
