@@ -28,6 +28,11 @@
     (callPackage ./dwl/dwl.nix {
       termcmd = "\"${lib.getExe pkgs.foot}\"";
       menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
+      volupcmd = "\"wpctl\", \"set-volume\", \"-l\", \"1.5\", \"@DEFAULT_AUDIO_SINK@\", \"5%+\"";
+      voldowncmd = "\"wpctl\", \"set-volume\", \"@DEFAULT_AUDIO_SINK@\", \"5%-\"";
+      volmutecmd = "\"wpctl\", \"set-mute\", \"@DEFAULT_AUDIO_SINK@\", \"toggle\"";
+      brupcmd = "\"brightnessctl\", \"-e\", \"set\", \"5%+\"";
+      brdowncmd = "\"brightnessctl\", \"-e\", \"set\", \"5%-\"";
     })
 
     # (dwl.override {

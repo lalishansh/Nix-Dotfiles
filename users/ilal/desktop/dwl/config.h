@@ -133,25 +133,14 @@ static const enum libinput_config_tap_button_map button_map =
 
 /* commands */
 // clang-format off
-static const char *termcmd[] = { @termcmd@, NULL};
-static const char *menucmd[] = { @menucmd@, NULL};
+static const char *termcmd[] = { @termcmd@, NULL };
+static const char *menucmd[] = { @menucmd@, NULL };
+static const char *volupcmd[] = { @volupcmd@, NULL };
+static const char *voldowncmd[] = { @voldowncmd@, NULL };
+static const char *volmutecmd[] = { @volmutecmd@, NULL };
+static const char *brupcmd[] = { @brupcmd@, NULL };
+static const char *brdowncmd[] = { @brdowncmd@, NULL };
 // clang-format on
-
-#define MAX_VOLUME_MULTIPLIER(decimal) #decimal
-static const char *volupcmd[] = {"wpctl",
-                                 "set-volume",
-                                 "-l",
-                                 MAX_VOLUME_MULTIPLIER(1.5),
-                                 "@DEFAULT_AUDIO_SINK@",
-                                 "5%+",
-                                 NULL};
-static const char *voldowncmd[] = {"wpctl", "set-volume",
-                                   "@DEFAULT_AUDIO_SINK@", "5%-", NULL};
-static const char *volmutecmd[] = {"wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@",
-                                   "toggle", NULL};
-static const char *brupcmd[] = {"brightnessctl", "-e", "set", "5%+", NULL};
-static const char *brdowncmd[] = {"brightnessctl", "-e", "set", "5%-", NULL};
-#undef MAX_VOLUME_MULTIPLIER
 
 #define SUPER WLR_MODIFIER_LOGO /* Windows/Super Key */
 #define CTRL WLR_MODIFIER_CTRL

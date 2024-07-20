@@ -4,6 +4,8 @@ lib,
 conf ? null,
 termcmd ? null,
 menucmd ? null,
+volupcmd ? null, voldowncmd ? null, volmutecmd ? null,
+brupcmd ? null, brdowncmd ? null,
 enableXWayland ? true,
 ...
 }:
@@ -54,6 +56,11 @@ pkgs.stdenv.mkDerivation rec {
           src = ./config.h;
           termcmd = "${termcmd}";
           menucmd = "${menucmd}";
+          volupcmd = "${volupcmd}";
+          voldowncmd = "${voldowncmd}";
+          volmutecmd = "${volmutecmd}";
+          brupcmd = "${brupcmd}";
+          brdowncmd = "${brdowncmd}";
         };
       in "cp ${configFile} config.def.h";
 
