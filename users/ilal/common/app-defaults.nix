@@ -3,8 +3,7 @@
 with lib;
 let
   browsers = [
-    "floorp.desktop"
-    "floorp-work.desktop"
+    # "floorp.desktop"
     "firefox.desktop"
     "tor-browser.desktop"
   ];
@@ -122,7 +121,7 @@ in
   xdg.mimeApps.defaultApplications = associations;
 
   home.packages = with pkgs; [
-    #floorp-unwrapped # 11.14.1 is broken
+    # floorp
     tor-browser
 
     zed-editor

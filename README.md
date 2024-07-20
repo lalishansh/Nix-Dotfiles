@@ -3,7 +3,7 @@
 1. Login
 2. `$ dwl`
 3. `<shift> + <alt‎> + <enter/return>` for terminal
-4. Use `nvim`, `nano` or `zed` to edit, floorp to browse the internet.
+4. Use `nvim`, `nano` or `zed` to edit, firefox to browse the internet.
 5. `<super/win> + <Q>` to kill apps
 
 ## Dir structure
