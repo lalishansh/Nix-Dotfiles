@@ -25,16 +25,19 @@
 
   home.packages = with pkgs; [
     # TESTING
-    (callPackage ./dwl/pkg.nix {})
-
-    (dwl.override {
-      conf = builtins.readFile (pkgs.substituteAll {
-        src = ./dwl/config.h;
-        termcmd = "\"${lib.getExe pkgs.foot}\"";
-        menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
-      });
-      enableXWayland = true;
+    (callPackage ./dwl/dwl.nix {
+      termcmd = "\"${lib.getExe pkgs.foot}\"";
+      menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
     })
+
+    # (dwl.override {
+    #   conf = builtins.readFile (pkgs.substituteAll {
+    #     src = ./dwl/config.h;
+    #     termcmd = "\"${lib.getExe pkgs.foot}\"";
+    #     menucmd = "\"${lib.getExe pkgs.rofi}\", \"-show\"";
+    #   });
+    #   enableXWayland = true;
+    # })
 
     rofi-wayland-unwrapped
     #(writeShellScriptBin "cliphist-rofi" (builtins.readFile ./rofi/scripts/cliphist-rofi-img))
