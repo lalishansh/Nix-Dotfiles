@@ -25,7 +25,7 @@
 
   home.packages = with pkgs; [
     # TESTING
-    # (import ./dwl/pkg.nix)
+    (callPackage ./dwl/pkg.nix {})
 
     (dwl.override {
       conf = builtins.readFile (pkgs.substituteAll {

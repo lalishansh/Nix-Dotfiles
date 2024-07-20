@@ -1,9 +1,9 @@
-with import <nixpkgs> {}; # bring all of Nixpkgs into scope
-
-stdenv.mkDerivation rec {
+{pkgs, ...}:
+pkgs.stdenv.mkDerivation rec {
   name = "hello-2.8";
-  src = fetchurl {
-    url = "mirror://gnu/hello/${name}.tar.gz";
-    sha256 = "0wqd8sjmxfskrflaxywc7gqw7sfawrfvdxd9skxawzfgyy0pzdz6";
+  version = "2.12.1";
+  src = pkgs.fetchurl {
+    url = "mirror://gnu/hello/hello-${version}.tar.gz";
+    sha256 = "sha256-jZkUKv2SV28wsM18tCqNxoCZmLxdYH2Idh9RLibH2yA=";
   };
 }
