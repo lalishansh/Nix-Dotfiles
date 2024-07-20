@@ -58,6 +58,7 @@
   "copy_on_select": true,
 
   // Meh ...
+  "auto_update": false, // NixOS dosen't have FHS so it can't update itself
   "telemetry": {
     "diagnostics": false,
     "metrics": false

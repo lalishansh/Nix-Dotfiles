@@ -13,7 +13,8 @@ raise_error() {
 # 1. Add changes to git
 git add .
 
-# 2. Run nixos-rebuild switch
+# 2. Run nixos-rebuild switch (with package updates)
+(sudo nix-channel --update) || raise_error
 (sudo nixos-rebuild switch --show-trace 2>&1) || raise_error # log to file and stdout
 
 # 3. Commit changes and exit
