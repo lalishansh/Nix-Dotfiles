@@ -10,7 +10,7 @@
   },
   {
     "bindings": {
-      "alt-g": ["task:spawn", "Git-TUI-Integration"]
+      "alt-g": ["task::Spawn", { "task_name": "Git-TUI-Integration" }]
     }
   }
 ]
