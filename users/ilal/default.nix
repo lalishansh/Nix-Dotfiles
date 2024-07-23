@@ -18,7 +18,9 @@ in
     home.homeDirectory = "/home/${username}";
 
     imports = [
-      ./home.nix
+      ./desktop
+      ./programs
+
       (import ../common/gitandssh.nix {
         inherit pkgs;
         sshProvider = "gnome-keyring";

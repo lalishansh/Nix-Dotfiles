@@ -1,11 +1,7 @@
 { config, pkgs, lib, ... }:
 {
-  home.username = "ilal";
-  home.homeDirectory = "/home/ilal";
-
   imports = [
-    ./desktop/setup.nix
-    ./common/app-defaults.nix
+    ./common
   ];
 
   home.packages = with pkgs; [
@@ -54,21 +50,4 @@
       enableCompletion = true;
     };
   };
-
-  gtk = {
-    enable = true;
-    theme = { name = "Adwaita"; package = pkgs.gnome-themes-extra; };
-  };
-  qt = {
-    enable = true;
-    style = { name = "adwaita-dark"; package = pkgs.adwaita-qt; };
-  };
-
-  services.cliphist.enable = true;
-
-  # Config to target compatibility of HomeManager version
-  home.stateVersion = "24.05";
-
-  # Let HomeManager install and manage itself
-  programs.home-manager.enable = true;
 }

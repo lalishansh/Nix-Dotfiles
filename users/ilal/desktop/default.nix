@@ -45,4 +45,15 @@
 
   home.file.".config/rofi/config.rasi".source = ./rofi/config.rasi;
   home.file.".config/rofi/mytheme.rasi".source = ./rofi/mytheme.rasi;
+
+  gtk = {
+    enable = true;
+    theme = { name = "Adwaita"; package = pkgs.gnome-themes-extra; };
+  };
+  qt = {
+    enable = true;
+    style = { name = "adwaita-dark"; package = pkgs.adwaita-qt; };
+  };
+
+  services.cliphist.enable = true;
 }
