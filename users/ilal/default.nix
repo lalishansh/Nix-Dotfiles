@@ -10,5 +10,6 @@ in
     #packages = with pkgs; []; # packages defined in /users/<user>/home.nix
     initialPassword = username;
   };
+
   home-manager.users.${username} = import ./home.nix;
 }
