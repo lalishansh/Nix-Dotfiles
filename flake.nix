@@ -13,7 +13,7 @@
       system = "x86_64-linux";
       modules = [
         # Syatem type
-        ./system-type/Laptop/configuration.nix
+        ./system-type/Laptop
 
         # Override
         home-manager.nixosModules.home-manager
