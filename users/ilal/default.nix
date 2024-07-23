@@ -1,13 +1,14 @@
 { config, ... }:
-
+let
+  username = "${baseNameOf (toString ./.)}";
+in
 {
   # Define the user account.
-  users.users.ilal = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Ishansh Lal";
     extraGroups = [ "networkmanager" "wheel" "flatpak" "login" "adbusers" ]; # `login` group for gnome-keyring
     #packages = with pkgs; []; # packages defined in /users/<user>/home.nix
-    initialPassword = "1234";
+    initialPassword = username;
   };
-  home-manager.users.ilal = import ./ilal/home.nix;
+  home-manager.users.${username} = import ./home.nix;
 }

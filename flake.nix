@@ -25,7 +25,7 @@
         }
 
         # All users
-        ./users/users.nix
+        ./users/ilal
       ];
     };
   };
