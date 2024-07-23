@@ -49,22 +49,6 @@
   ];
 
   programs = {
-    ssh = {
-      enable = true;
-      package = pkgs.gnome-keyring; # system-pkg
-      extraConfig = "
-        Host github.com
-          User git
-          IdentityFile ~/.ssh/github
-          PreferredAuthentications publickey
-      ";
-    };
-    git = {
-      userName = "Ishansh Lal";
-      userEmail = "lalishansh@gmail.com";
-      lfs.enable = true;
-    };
-
     bash = {
       enable = true;
       enableCompletion = true;

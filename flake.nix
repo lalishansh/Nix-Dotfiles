@@ -27,6 +27,7 @@
           }
 
           # Build for system type
+          # /etc/nixos/hardware-configuration.nix # require --impure
           ./system-type/Laptop/hardware.nix
           ./system-type/Laptop
 
