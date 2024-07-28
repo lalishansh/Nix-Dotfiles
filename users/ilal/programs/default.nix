@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./common
+    ./default-apps
   ];
 
   home.packages = with pkgs; [
@@ -10,9 +10,7 @@
     fastfetch
 
     # Desktop
-    foot
     warp-terminal
-    (nerdfonts.override { fonts = [ "CascadiaCode" "DroidSansMono" ]; })
 
     # Dev
     ruby

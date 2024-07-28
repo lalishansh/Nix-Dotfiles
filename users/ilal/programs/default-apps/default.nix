@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 with lib;
 let
   browsers = [
@@ -130,6 +129,7 @@ in
     nixpkgs-fmt
     vale-ls
     gitui
+    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
 
     feh
     yt-dlp
@@ -139,13 +139,15 @@ in
 
     aria2
     persepolis
+
+    foot
   ];
 
   # Copy app specific configs, for symlinks use `config.lib.file.mkOutOfStoreSymlink + <absolute-path>` instead of <path>
   home.file = {
-    ".config/foot/foot.ini".source = ./foot-terminal.ini;
     ".config/zed" = { source = ./zed; recursive = true; };
-    "${temp.aria2ConfigFile}".source = ./aria2.conf;
+    ${temp.aria2ConfigFile}.source = ./aria2.conf;
+    ".config/foot/foot.ini".source = ./foot-terminal.ini;
   };
 
   home.activation.aria2TouchSessionFile = hm.dag.entryAfter ["writeBoundary"] ''

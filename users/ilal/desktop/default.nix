@@ -37,6 +37,7 @@
 
     rofi-wayland-unwrapped
     #(writeShellScriptBin "cliphist-rofi" (builtins.readFile ./rofi/scripts/cliphist-rofi-img))
+    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
 
     # cliphist
     gnome-keyring
