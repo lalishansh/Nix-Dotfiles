@@ -9,7 +9,7 @@ in
   users.users.${username} = {
     description = "${fullname}";
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "flatpak" "login" "adbusers" ]; # `login` group for gnome-keyring
+    extraGroups = [ "networkmanager" "wheel" "flatpak" "login" "adbusers" "audio" ]; # `login` group for gnome-keyring
     initialPassword = username;
   };
 
