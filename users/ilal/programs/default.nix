@@ -21,6 +21,7 @@
     # Tools
     bitwarden
     adbtuifm
+    fzf
 
     # nix related
     nix-output-monitor # for 'nom' command (more verbose than 'nix')
@@ -46,6 +47,12 @@
     bash = {
       enable = true;
       enableCompletion = true;
+      bashrcExtra = ''
+        if command -v fzf-share >/dev/null; then
+          source "$(fzf-share)/key-bindings.bash"
+          source "$(fzf-share)/completion.bash"
+        fi
+      '';
     };
   };
 }

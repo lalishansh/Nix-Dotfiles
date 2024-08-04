@@ -1,18 +1,11 @@
 { config, pkgs, lib, ... }:
 {
-  xdg = {
-    enable = true;
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
-      config.common = {
-        default = [ "gtk" ];
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-      };
-      xdgOpenUsePortal = true;
-    };
-    userDirs = { enable = true; createDirectories = true; };
-  };
+  imports = [
+    (import ../xdg.nix {
+      inherit pkgs;
+      portals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
+    })
+  ];
 
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -40,7 +33,6 @@
     (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
 
     # cliphist
-    gnome-keyring
     brightnessctl
   ];
 

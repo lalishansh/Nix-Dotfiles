@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   emailid  = "lalishansh@gmail.com";
   fullname = "Ishansh Lal";
   username = "${baseNameOf (toString ./.)}";
+  hypruser = "h${username}";
 in
 {
   # Define the user account.
@@ -20,9 +21,9 @@ in
   };
 
   home-manager.users = let
-    config = { user, includes ? [] }:{
+    config = { user, include ? [] }:{
       home.username = user;
-      home.homeDirectory = "/home/${username}";
+      home.homeDirectory = "/home/${user}";
       imports = [
         ./programs
         (import ./desktop/gitandssh.nix {
@@ -31,7 +32,7 @@ in
           email = emailid;
           name = fullname;
         })
-      ] ++ includes;
+      ] ++ include;
 
       # Config to target compatibility of HomeManager version
       home.stateVersion = "24.05";
@@ -41,8 +42,8 @@ in
     };
   in {
     ${username} = config {
-      user = "${username}";
-      includes = [
+      user = username;
+      include = [
         ./desktop/dwl-rofi
       ];
     };
