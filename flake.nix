@@ -3,19 +3,19 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # no hardware config for HP Omen 15
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:{
+  outputs = { self, nixpkgs, nixpkgs-stable, ... }@inputs:{
     nixosConfigurations = {
-      "NixOS-Laptop" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+      "NixOS-Laptop" = let
         system = "x86_64-linux";
+        pkgs-stable = import nixpkgs-stable { inherit system; };
+      in nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs pkgs-stable;
+        };
         modules = [
           {
             # Override

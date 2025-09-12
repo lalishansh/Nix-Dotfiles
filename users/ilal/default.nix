@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, ... }:
+{ inputs, pkgs, lib, pkgs-stable, ... }:
 {
   imports = [
     ../shared/options.nix
@@ -13,10 +13,11 @@
       extraGroups = [ "networkmanager" "wheel" ];
     }
     (import ./desktop-env {inherit inputs pkgs lib;})
-    (import ./development {inherit pkgs;})
+    (import ./development {inherit pkgs pkgs-stable;})
   ];
 
   # Move some things to user level?
+  virtualisation.waydroid.enable = true;
   xdg = {
     mime.enable = true;
     portal.config = {
@@ -27,7 +28,8 @@
   };
   qt = {
     enable = true;
-    platformTheme = "kde6";
+    platformTheme = "kde";
+    style = "adwaita-dark";
   };
   xdg.portal = {
     enable = true;
