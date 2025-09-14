@@ -5,9 +5,10 @@ import QtQuick.Layouts
 import qs.core.bar.helpers
 
 // extensions
-import "./ScreenName" as ScreenName
+import "./Test_ScreenName" as ScreenName
 import "./Clock" as Clock
 import "./ActiveWindowInfo" as ActiveWindowInfo
+import "./SystemTray" as SystemTray
 
 // extensions
 
@@ -22,7 +23,7 @@ RowLayout {
         //     text: "Count " + parent.parent.counter + " "
         // }
         // ScreenName.BarMod {}
-        ActiveWindowInfo.BarModHyprland {}
+        ActiveWindowInfo.BarMod {}
     }
     CentreModules {
         // there are some issues here !
@@ -48,6 +49,7 @@ RowLayout {
         //     color: "#999"
         //     text: "Count " + parent.parent.counter + " "
         // }
+        SystemTray.BarMod {}
         VerticalBarSeparator {}
         Clock.BarMod {}
     }

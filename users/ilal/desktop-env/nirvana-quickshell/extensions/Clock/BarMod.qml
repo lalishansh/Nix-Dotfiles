@@ -1,20 +1,15 @@
 import QtQuick
+import Quickshell
 
 Text {
-    id: timeText
+    anchors.verticalCenter: parent.verticalCenter
     color: "#00ffff"
     font.pointSize: 10
 
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            timeText.text = new Date().toLocaleTimeString(Qt.locale(), "hh:mm:ss");
-        }
+    SystemClock {
+        id: clock
+        precision: SystemClock.Seconds
     }
 
-    Component.onCompleted: {
-        text = new Date().toLocaleTimeString(Qt.locale(), "hh:mm:ss");
-    }
+    text: Qt.formatDateTime(clock.date, "hh:mm:ss • ddd, dd/MM")
 }

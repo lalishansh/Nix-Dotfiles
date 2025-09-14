@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import Quickshell.Wayland
 
 Column {
-    id: colLayout
     Layout.alignment: Qt.AlignTop
 
     // Get the active window from ToplevelManager
