@@ -13,6 +13,7 @@ Row {
 
     Button {
         id: trayOverflowButton
+        visible: SystemTray.items.values.length > 0
 
         onClicked: (root.overflowTrayVisible = !root.overflowTrayVisible)
 
@@ -27,7 +28,20 @@ Row {
             // 0         +         1         1      1
             // 1         +         0         1      1
             // 0         +         0         0      0
-            text: (+root.overflowTrayVisible) + (+root.barBottom) === 1 ? "↑" : "↓"
+            text: (+root.overflowTrayVisible) + (+root.barBottom) === 1 ? "" : ""
+            // text: {
+            //     if (true) /*root.horizontal*/ {
+            //         if (root.barBottom)
+            //             return root.overflowTrayVisible ? "󰁊" : "󰁣";
+            //         else
+            //             return root.overflowTrayVisible ? "󰁢" : "󰁋";
+            //     } else {
+            //         if (true) /*bar.left*/
+            //             return root.overflowTrayVisible ? "󰁒" : "󰁚";
+            //         else
+            //             return root.overflowTrayVisible ? "󰁙" : "󰁓";
+            //     }
+            // }
         }
         ToolPopup {
             // TODO: clicking outside unfocuses

@@ -9,6 +9,8 @@ import "./Test_ScreenName" as ScreenName
 import "./Clock" as Clock
 import "./ActiveWindowInfo" as ActiveWindowInfo
 import "./SystemTray" as SystemTray
+import "./BatteryInfo" as BatteryInfo
+import "./QuickSettingsPanel" as QuickSettings
 
 // extensions
 
@@ -39,6 +41,8 @@ RowLayout {
             color: "#bbb"
             text: "HIIIIIIIIII"
         }
+        VerticalBarSeparator {}
+        Clock.BarMod {}
     }
     RightModules {
         // property real counter: 0
@@ -50,7 +54,7 @@ RowLayout {
         //     text: "Count " + parent.parent.counter + " "
         // }
         SystemTray.BarMod {}
-        VerticalBarSeparator {}
-        Clock.BarMod {}
+        BatteryInfo.BarMod {}
+        QuickSettings.BarMod {}
     }
 }

@@ -5,8 +5,8 @@ in
   packages = with pkgs; [
     nixd
     nil
-    # zed-editor
-    floorp
+    zed-editor
+    floorp-bin
     git
     fzf # command-line fuzzy finder, awesome tool, master it
 
@@ -30,8 +30,8 @@ in
       ankiAddons.anki-connect
       ankiAddons.review-heatmap
     ])
-  ] ++ [
-    pkgs-stable.zed-editor
+
+    kdePackages.kdeconnect-kde
   ];
   path.".bashrc".text = ''
     export HISTCONTROL=ignoreboth:erasedups
