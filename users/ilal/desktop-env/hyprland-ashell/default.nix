@@ -8,11 +8,16 @@ in {
     hyprpaper
     hyprlock
     ashell
+    rose-pine-hyprcursor
 
+    # Just for Screenshot
+    grim
+    slurp
+    grimblast
+    satty
     # Applications
     kitty
-    hyprshot
-    anyrun
+    yazi
     walker
 
     # dependencies
@@ -56,4 +61,5 @@ in {
   config_dir."hypr".directory = readDirPaths ./hypr;
   config_dir."ashell/config.toml".source  = ./ashell.toml;
   config_dir."walker".directory = readDirPaths ./walker;
+  config_dir."satty/config.toml".source  = ./satty.toml;
 }

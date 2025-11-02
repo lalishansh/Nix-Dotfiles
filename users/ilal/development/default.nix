@@ -10,12 +10,7 @@ in
     qbittorrent
     (mpv.override {
       scripts = with pkgs.mpvScripts;
-        [
-          uosc
-          autoload
-          thumbfast
-          autocrop
-        ]
+        [ uosc autoload thumbfast autocrop ]
         ++ lib.optional pkgs.stdenv.isLinux pkgs.mpvScripts.mpris;
     })
     anime4k
@@ -28,6 +23,44 @@ in
 
     kdePackages.kdeconnect-kde
     kitty
+
+    (yazi.override {
+      extraPackages = with pkgs; [
+        mediainfo
+        util-linux
+        udisks
+        wl-clipboard
+      ];
+      plugins = {
+        inherit (pkgs.yaziPlugins) bypass chmod mount mediainfo wl-clipboard; #git
+      };
+      settings.keymap = {
+        input.prepend.keymap = [
+          { on = "<Esc>"; run = "close --submit"; desc = "Cancel input"; } # How does it work?
+        ];
+        mgr.prepend_keymap = [
+          { on = "l"; run = "plugin bypass smart-enter"; desc = "Open a file, or recursively enter child directory, skipping children with only a single subdirectory"; }
+          { on = "h"; run = "plugin bypass reverse"; desc = "Recursively enter parent directory, skipping parents with only a single subdirectory"; }
+          { on = [ "c" "m" ]; run  = "plugin chmod"; desc = "Chmod on selected files"; }
+          { on = "M"; run = "plugin mount"; desc = "Mount manager"; }
+          { on = "<C-y>"; run = [ "plugin wl-clipboard" "yank" ]; desc = "Copy to system clipboard"; }
+        ];
+      };
+      settings.yazi = {
+        mgr.show_hidden = true;
+        tasks.image_alloc = 1024 * 1024 * 1024;
+        plugin.prepend_preloaders = [
+          { mime = "{audio,video,image}/*"; run = "mediainfo"; }
+          { mime = "application/subrip"; run = "mediainfo"; }
+          { mime = "application/postscript"; run = "mediainfo"; }
+        ];
+        plugin.prepend_previewers = [
+          { mime = "{audio,video,image}/*"; run = "mediainfo"; }
+          { mime = "application/subrip"; run = "mediainfo"; }
+          { mime = "application/postscript"; run = "mediainfo"; }
+        ];
+      };
+    })
 
     gimp
 
@@ -46,6 +79,8 @@ in
     cargo rustc
   ] ++ [
     # Flatpak and related packages
+    # Note: use 'flatpak override --user com.jetbrains.RustRover --talk-name=org.freedesktop.Flatpak' for flatpak-spawn access
+    # then you can do things like '/usr/bin/flatpak-spawn --host --env=TERM=xterm-256color bash -c bash' from inside flatpak app
     flatpak
     fuse3
     cosmic-store
@@ -71,28 +106,9 @@ in
       # ALT-C - Paste the selected directory path into the command line and cd to it
       source "$(fzf-share)/key-bindings.bash"
       source "$(fzf-share)/completion.bash"
-      # Custom key bindings
-      # CTRL-` - (Same as CTRL-R) Paste the selected command from history into the command line
-      if (( BASH_VERSINFO[0] < 4 )); then
-          # use workaround for vi-command mode
-          bind -m vi-command '"\C-`": "\C-z\C-r\C-z"'
-          bind -m vi-insert '"\C-`": "\C-z\C-r\C-z"'
-          bind '"\C-`": "\C-r"'  # For emacs mode (default binding)
-      else
-          # Bash version >= 4 - normal bindings
-          bind -m emacs-standard '"\C-`": "\C-r"'
-          bind -m vi-command '"\C-`": "\C-r"'
-          bind -m vi-insert '"\C-`": "\C-r"'
-      fi
     fi
 
-    z() {
-        if [ $# -eq 0 ]; then
-            popd
-        else
-            pushd "$1"
-        fi
-    }
+    z() { (( $# != 0 )) && pushd "$1" || popd; }
     alias l='ls -ACF --color=auto'
     alias gs='git status'
     alias gd='git diff'
