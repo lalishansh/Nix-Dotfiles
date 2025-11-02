@@ -39,7 +39,7 @@ Text {
                     "Not charging": "  ",
                     "Full": "  "
                 };
-                const capacityBy10 = parseInt(capacityStr) / 10;
+                const capacityBy10 = Math.floor(parseInt(capacityStr) / 10);
 
                 batteryItem.text = `${batterySymbols[capacityBy10]} ${capacityStr}% • ${batteryStatus[status]}`;
                 batteryItem.color = batteryColors[capacityBy10];

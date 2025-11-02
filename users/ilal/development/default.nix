@@ -3,11 +3,7 @@ let
 in
 {
   packages = with pkgs; [
-    nixd
-    nil
-    zed-editor
     floorp-bin
-    git
     fzf # command-line fuzzy finder, awesome tool, master it
 
     youtube-music
@@ -23,17 +19,44 @@ in
         ++ lib.optional pkgs.stdenv.isLinux pkgs.mpvScripts.mpris;
     })
     anime4k
+    htop
 
-    flatpak
-    fuse3
     (anki.withAddons [
       ankiAddons.anki-connect
       ankiAddons.review-heatmap
     ])
 
     kdePackages.kdeconnect-kde
+    kitty
+
+    gimp
+
+    zed-editor
+    git
+    nixd  # Nix Language Server
+    hugo  # Website
+    # Resume
+    typst tinymist
+    # C++
+    cmake ninja
+    llvmPackages.clang
+    gcc gdb
+    binutils
+    # Rust
+    cargo rustc
+  ] ++ [
+    # Flatpak and related packages
+    flatpak
+    fuse3
+    cosmic-store
   ];
-  path.".bashrc".text = ''
+
+  home_dir.".profile".text = ''
+   # Flatpak support
+   export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
+  '';
+
+  home_dir.".bashrc".text = ''
     export HISTCONTROL=ignoreboth:erasedups
     export EDITOR=zed
     export VISUAL=zed
@@ -92,12 +115,9 @@ in
     alias ~='z ~'
     alias reload='source ~/.bashrc && echo "Reloaded!"'
   '';
-  path.".profile".text = ''
-   export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
-  '';
 
   # curl -sL https://github.com/bloc97/Anime4K/raw/master/md/Template/GLSL_Mac_Linux_Low-end/input.conf | grep '^CTRL' | sed -r -e '/^$/d' -e 's|~~/shaders/|${anime4k}/|g' -e "s| | |" -e "s|$||"
-  path.".config/mpv/input.conf".text = with pkgs; ''
+  config_dir."mpv/input.conf".text = with pkgs; ''
     Ctrl+o script-binding uosc/open-file
     CTRL+1 no-osd change-list glsl-shaders set "${anime4k}/Anime4K_Clamp_Highlights.glsl:${anime4k}/Anime4K_Restore_CNN_M.glsl:${anime4k}/Anime4K_Upscale_CNN_x2_M.glsl:${anime4k}/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A (Fast)"
     CTRL+2 no-osd change-list glsl-shaders set "${anime4k}/Anime4K_Clamp_Highlights.glsl:${anime4k}/Anime4K_Restore_CNN_Soft_M.glsl:${anime4k}/Anime4K_Upscale_CNN_x2_M.glsl:${anime4k}/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B (Fast)"
@@ -107,7 +127,7 @@ in
     CTRL+6 no-osd change-list glsl-shaders set "${anime4k}/Anime4K_Clamp_Highlights.glsl:${anime4k}/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${anime4k}/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/Anime4K_Restore_CNN_S.glsl:${anime4k}/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C+A (Fast)"
     CTRL+0 no-osd change-list glsl-shaders clr ""; show-text "GLSL shaders cleared"
   '';
-  path.".config/mpv/mpv.conf".text = ''
+  config_dir."mpv/mpv.conf".text = ''
     # uosc provides seeking & volume indicators
     osd-bar=no
     # uosc will draw window controls and border
@@ -115,6 +135,7 @@ in
 
     slang=en
     save-position-on-quit
+    watch-later-options=start,speed,vid,aid,sid,secondary-sid,audio-delay,sub-delay,secondary-sub-delay,mute,sub-visibility,secondary-sub-visibility,fullscreen
     force-window=yes
     idle=once
 
@@ -123,5 +144,11 @@ in
     audio-channels=auto
 
     profile=gpu-hq
+
+    # Script options
+    # Autocrop
+    script-opts-append=autocrop-detect_seconds=4
   '';
+
+  config_dir."kitty/kitty.conf".source = ./kitty.conf;
 }

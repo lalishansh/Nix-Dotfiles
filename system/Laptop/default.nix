@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
     ../shared
@@ -43,9 +43,15 @@
       '';
     firewall = {
       enable = true;
-      # Source: [for steam](https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/programs/steam.nix)
+      # Source (https://github.com/NixOS/nixpkgs/blob/nixos-25.05):
+      # - [for steam](nixos/modules/programs/steam.nix)
+      # - [for kdeconnect](nixos/modules/programs/kdeconnect.nix)
       allowedUDPPortRanges = [
+        { from = 1714; to = 1764; } # KDE-Connect
         { from = 27031; to = 27035; } # Steam: for remote play
+      ];
+      allowedTCPPortRanges = [
+        { from = 1714; to = 1764; } # For KDE-Connect
       ];
       allowedUDPPorts = [
         27036 # Steam: for peer discovery (local game transfers and remote play)
@@ -93,6 +99,7 @@
   services = {
     libinput.enable = true;
     thermald.enable = true;
+    upower.enable = true;
     printing.enable = true;
     # acpid.enable = true; # daemon for delivering ACPI events basically powerbutton events etc.
     fwupd.enable = true; # enable firmware updates by applications

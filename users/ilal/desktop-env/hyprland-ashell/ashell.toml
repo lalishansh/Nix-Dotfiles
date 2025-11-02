@@ -1,0 +1,25 @@
+position = "Top"
+enable_esc_key = true
+outputs = "All"
+
+[modules]
+left = [ "appLauncher", "Workspaces" ]
+center = [ "WindowTitle" ]
+right = [ "SystemInfo", "Tray", [ "Clock", "Privacy", "Settings" ] ]
+
+[workspaces]
+visibility_mode = "MonitorSpecific"
+enable_workspace_filling = false
+
+[settings]
+shutdown_cmd = "shutdown now"
+suspend_cmd = "systemctl suspend"
+reboot_cmd = "systemctl reboot"
+logout_cmd = "loginctl kill-user $(whoami)"
+lock_cmd = "hyprlock &"
+bluetooth_more_cmd = "blueman-manager"
+
+[[CustomModule]]
+name = "appLauncher"
+icon = "󱗼"
+command = "walker"

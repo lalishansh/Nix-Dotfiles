@@ -14,8 +14,6 @@ Scope {
     id: root
     // Modules in Bar
     Bar {}
-    // Modules in Settings panel
-    // Layout_Settings {}
     // Modules main windows
     // Layout_Main {}
 }

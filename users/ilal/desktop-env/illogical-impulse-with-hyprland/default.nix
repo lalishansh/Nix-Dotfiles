@@ -7,6 +7,7 @@ in
   packages = with pkgs; [
     kitty
     hyprland
+    hyprpaper
 
     # dependencies
     matugen
@@ -139,8 +140,8 @@ in
     quickshell
     #inputs.quickshell.packages.${pkgs.system}.default
   ];
-  path.".config/kitty".copy = ./illogical-impulse-end4-kitty;
-  path.".config/hypr".copy = ./illogical-impulse-end4-hyprland;
-  path.".config/matugen".copy = ./illogical-impulse-end4-matugen;
-  path.".config/quickshell".copy = ./illogical-impulse-end4-quickshell;
+  config_dir."kitty".source = ./illogical-impulse-end4-kitty;
+  config_dir."hypr".source = ./illogical-impulse-end4-hyprland;
+  config_dir."matugen".source = ./illogical-impulse-end4-matugen;
+  config_dir."quickshell".source = ./illogical-impulse-end4-quickshell;
 }

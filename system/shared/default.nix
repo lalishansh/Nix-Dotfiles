@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./options.nix
+    ./options
   ];
 
   # Bootloader
